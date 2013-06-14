@@ -73,7 +73,7 @@ sub handle_psgi {
 
     eval {
         $self->_call('handle_request');
-        if ($env->{'xml.atom.server.is_soap'}) {
+        if ($self->is_soap) {
             my $body = $res->body;
             if (defined $body) {
                 $body =~ s!^(<\?xml.*?\?>)!!;
@@ -97,6 +97,18 @@ EOXML
     return $res->finalize;
 }
 
+sub request_params {
+    return $_[0]->req->env->{'xml.atom.server.request_params'};
+}
+
+sub request_method {
+    return $_[0]->req->env->{'xml.atom.server.request_method'};
+}
+
+sub is_soap {
+    return $_[0]->req->env->{'xml.atom.server.is_soap'};
+}
+
 sub _call {
     my ($self, $name, @args) = @_;
 
@@ -113,7 +125,7 @@ sub get_auth_info {
 
     my $req = $self->req;
     my %param; # XXX Hash::MultiValue?
-    if ($req->env->{'xml.atom.server.is_soap'}) {
+    if ($self->is_soap) {
         my $xml = $self->xml_body;
         my $auth = XML::Atom::Util::first($xml, NS_WSSE, 'UsernameToken');
         $param{Username} = XML::Atom::Util::textValue($auth, NS_WSSE, 'Username');
@@ -180,6 +192,12 @@ sub auth_failure {
     my ($self, $code, $reason) = @_;
     my $res = $self->res;
     $res->header('WWW-Authenticate', 'WSSE profile="UsernameToken"');
+    $self->error($code, $reason);
+}
+
+sub error {
+    my ($self, $code, $reason) = @_;
+    my $res = $self->res;
     $res->code($code);
     # XXX PSGI doesn't really give us a way to override the
     # message portion of response status line, so shove it in
@@ -210,7 +228,7 @@ sub atom_body {
     my $req = $self->req;
     my $env = $req->env;
     my $atom;
-    if ($env->{'xml.atom.server.is_soap'}) {
+    if ($self->is_soap) {
         my $xml = $self->xml_body;
         $atom = XML::Atom::Entry->new(Doc => XML::Atom::Util::first($xml, NS_SOAP, 'Body'));
     } else {
@@ -261,12 +279,13 @@ XML::Atom::Server::PSGI - It's new $module
 
     use XML::Atom::Server::PSGI;
 
-    my $app = XML::Atom::Server::PSGI->new(
+    my $server = XML::Atom::Server::PSGI->new(
         callbacks => {
             on_password_for_user => sub { ... }
             on_handle_request => sub { ... }
         }
     );
+    $server->psgi_app;
 
     package MyServer;
     use strict;
@@ -277,7 +296,8 @@ XML::Atom::Server::PSGI - It's new $module
     }
 
     1;
-    
+
+    MyServer->new->psgi_app;
 
 =head1 DESCRIPTION
 
