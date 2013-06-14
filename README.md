@@ -6,12 +6,13 @@ XML::Atom::Server::PSGI - It's new $module
 
     use XML::Atom::Server::PSGI;
 
-    my $app = XML::Atom::Server::PSGI->new(
+    my $server = XML::Atom::Server::PSGI->new(
         callbacks => {
             on_password_for_user => sub { ... }
             on_handle_request => sub { ... }
         }
     );
+    $server->psgi_app;
 
     package MyServer;
     use strict;
@@ -22,9 +23,8 @@ XML::Atom::Server::PSGI - It's new $module
     }
 
     1;
-    
 
-
+    MyServer->new->psgi_app;
 
 # DESCRIPTION
 

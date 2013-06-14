@@ -10,7 +10,7 @@ my $server = XML::Atom::Server::PSGI->new(
         on_password_for_user => sub {
             my ($self, $username) = @_;
 
-            my $params = $self->req->env->{'xml.atom.server.request_params'};
+            my $params = $self->request_params;
             my $foo    = $params->get('foo');
         
             if ($username eq 'foo' && $foo eq 'baz') {
@@ -24,7 +24,6 @@ my $server = XML::Atom::Server::PSGI->new(
             if (! $self->authenticate) {
                 return;
             }
-            $self->res->content_type('application/xml+atom');
             $self->res->body(<<'EOXML');
 <?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">

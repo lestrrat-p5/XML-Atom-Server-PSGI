@@ -45,17 +45,29 @@
             "Digest::SHA1" : "0",
             "MIME::Base64" : "0",
             "Plack" : "1.0024",
+            "XML::Atom" : "0.41",
             "perl" : "5.008001"
          }
       },
       "test" : {
          "requires" : {
             "LWP::Protocol::PSGI" : "0",
-            "Test::More" : "0.98",
-            "XML::Atom" : "0.41"
+            "Test::Fatal" : "0.010",
+            "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/lestrrat/p5-XML-Atom-Server-PSGI/issues"
+      },
+      "homepage" : "https://github.com/lestrrat/p5-XML-Atom-Server-PSGI",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/lestrrat/p5-XML-Atom-Server-PSGI.git",
+         "web" : "https://github.com/lestrrat/p5-XML-Atom-Server-PSGI"
+      }
+   },
    "version" : "0.01"
 }
