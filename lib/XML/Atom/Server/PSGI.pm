@@ -91,6 +91,10 @@ SOAP
         }
     };
     if (my $E = $@) {
+        # Escape 
+        $E =~ s/</&lt;/g;
+        $E =~ s/>/&gt;/g;
+        $res->code(500);
         $res->body(<<EOXML);
 <?xml version="1.0" encoding="UTF-8"?>
 <error>$E</error>
