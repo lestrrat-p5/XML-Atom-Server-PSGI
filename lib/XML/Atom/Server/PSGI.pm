@@ -37,6 +37,9 @@ sub new {
     if (! $self->xml_parser()) {
         $self->xml_parser(XML::Atom::Server::PSGI::XMLParser->new);
     }
+    if (! $self->callbacks) {
+        $self->callbacks({});
+    }
     return $self;
 }
 
