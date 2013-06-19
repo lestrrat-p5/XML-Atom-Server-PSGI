@@ -300,7 +300,7 @@ __END__
 
 =head1 NAME
 
-XML::Atom::Server::PSGI - It's new $module
+XML::Atom::Server::PSGI - XML::Atom::Server for PSGI
 
 =head1 SYNOPSIS
 
