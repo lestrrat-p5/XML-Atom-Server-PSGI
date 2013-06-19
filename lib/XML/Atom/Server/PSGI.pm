@@ -57,6 +57,8 @@ sub handle_psgi {
         $self->response(undef);
     });
 
+    $env->{'xml.atom.server.request_method'} = $req->method;
+
     # Process parameters in path_info
     my $path_info = $req->path_info;
     my $params    = Hash::MultiValue->new;
@@ -104,14 +106,32 @@ EOXML
     return $res->finalize;
 }
 
+# for compat (sorta)
 sub request_params {
     return $_[0]->req->env->{'xml.atom.server.request_params'};
 }
 
+# for compat
 sub request_method {
     return $_[0]->req->env->{'xml.atom.server.request_method'};
 }
 
+# for compat
+sub request_header {
+    return $_[0]->req->header($_[1]);
+}
+
+# for compat
+sub response_header {
+    return shift->res->header(@_);
+}
+
+# for compat
+sub response_code {
+    return shift->res->code(@_);
+}
+
+# for compat
 sub is_soap {
     return $_[0]->req->env->{'xml.atom.server.is_soap'};
 }
