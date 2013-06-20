@@ -106,7 +106,11 @@ EOXML
     return $res->finalize;
 }
 
-# for compat (sorta)
+# for compat
+sub request_param {
+    shift->request_params->get(@_);
+}
+
 sub request_params {
     return $_[0]->req->env->{'xml.atom.server.request_params'};
 }
@@ -129,6 +133,11 @@ sub request_header {
 # for compat
 sub response_header {
     return shift->res->header(@_);
+}
+
+# for compat
+sub response_content_type {
+    return shift->res->content_type(@_);
 }
 
 # for compat
