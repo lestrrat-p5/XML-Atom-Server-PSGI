@@ -1,6 +1,6 @@
 # NAME
 
-XML::Atom::Server::PSGI - It's new $module
+XML::Atom::Server::PSGI - XML::Atom::Server for PSGI
 
 # SYNOPSIS
 
