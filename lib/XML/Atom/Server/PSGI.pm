@@ -112,6 +112,11 @@ sub request_params {
 }
 
 # for compat
+sub uri {
+    return $_[0]->req->uri;
+}
+
+# for compat
 sub request_method {
     return $_[0]->req->env->{'xml.atom.server.request_method'};
 }
