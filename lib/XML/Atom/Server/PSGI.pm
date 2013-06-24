@@ -16,7 +16,7 @@ use constant NS_WSSE => 'http://schemas.xmlsoap.org/ws/2002/07/secext';
 use constant NS_WSU => 'http://schemas.xmlsoap.org/ws/2002/07/utility';
 
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 sub psgi_app {
     my $self = shift;

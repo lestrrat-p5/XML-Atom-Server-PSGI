@@ -2,6 +2,11 @@ Revision history for Perl extension XML-Atom-Server-PSGI
 
 {{$NEXT}}
 
+0.03 2013-06-24T00:27:43Z
+    (Note: these methods are not recommended for use, but exist to
+    help backwards compatiblity with XML::Atom::Server)
+    - Add request_content()
+    
 0.02 2013-06-20T05:21:05Z
     (Note: these methods are not recommended for use, but exist to
     help backwards compatiblity with XML::Atom::Server)
