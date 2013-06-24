@@ -116,6 +116,11 @@ sub request_params {
 }
 
 # for compat
+sub request_content {
+    shift->req->content;
+}
+
+# for compat
 sub uri {
     return $_[0]->req->uri;
 }
