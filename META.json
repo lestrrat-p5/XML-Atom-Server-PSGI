@@ -42,9 +42,11 @@
       },
       "runtime" : {
          "requires" : {
+            "Class::Accessor::Lite" : "0",
             "Digest::SHA1" : "0",
             "MIME::Base64" : "0",
             "Plack" : "1.0024",
+            "Scope::Guard" : "0",
             "XML::Atom" : "0.41",
             "perl" : "5.008001"
          }
@@ -69,5 +71,5 @@
          "web" : "https://github.com/lestrrat/p5-XML-Atom-Server-PSGI"
       }
    },
-   "version" : "0.03"
+   "version" : "0.04"
 }

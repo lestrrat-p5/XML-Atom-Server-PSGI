@@ -2,6 +2,9 @@ Revision history for Perl extension XML-Atom-Server-PSGI
 
 {{$NEXT}}
 
+0.04 2013-07-24T04:01:08Z
+    - Add missing prereqs (issue #1)
+
 0.03 2013-06-24T00:27:43Z
     (Note: these methods are not recommended for use, but exist to
     help backwards compatiblity with XML::Atom::Server)
